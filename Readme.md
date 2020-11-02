@@ -1,21 +1,34 @@
-PoC for STF deployment on a single machine
-===========
-# Installation
+# STF
 
-* install docker
-* install docker-compose
-* clone this repo
+[STF](https://github.com/openstf/stf) 的 Docker Compose 编排。
 
-# Usage
-choose an IP your deployment should use, usually that will be the IP of your host.  
-choose a secret to be used for inter-service authentication.  
-Update the `.env` file accordingly
+派生自 [nikosch86/stf-poc](https://github.com/nikosch86/stf-poc)，其仅可用于 Linux 服务器。
 
-Run `docker-compose up -d --build`  
-Point your browser to the IP you chose,  
-login by providing any username and valid e-mail.
+本派生版本仅适用于 Mac 电脑和 Windows 电脑，请根据你的使用场景选用。
 
+## 如何安装
 
-A little write-up on this setup:  
-https://medium.com/@nikosch86/getting-started-with-automated-in-house-testing-on-android-smartphones-using-stf-dafecee4a8ee  
-If you clap it will make me happy :)
+- 首先，在你的设备上安装 [Docker](https://docs.docker.com/get-docker/) 和 [Docker Compose](https://docs.docker.com/compose/install/)。
+
+- 然后，在你的设备上安装 [adb](https://developer.android.com/studio/releases/platform-tools) 并启动：
+
+  ```bash
+  adb start-server -a
+  ```
+
+- 最后，克隆本仓库，并启动 Docker Compose 编排：
+
+  ```bash
+  # 克隆仓库
+  git clone https://github.com/fjc0k/stf-poc.git
+
+  # 编排启动
+  docker-compose up -d --build
+  ```
+
+## 如何访问
+
+浏览器打开 `http://127.0.0.1:9090` 输入管理员名称、邮箱即可访问：
+
+- 名称：`administrator`
+- 邮箱：`administrator@fakedomain.com`

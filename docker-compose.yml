@@ -11,7 +11,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     restart: unless-stopped
     ports:
-      - 80:80
+      - 9090:80
     depends_on:
       - app
       - auth
@@ -20,12 +20,12 @@ services:
       - storage-temp
       - websocket
       - api
-  adb:
-    image: sorccu/adb:latest
-    restart: unless-stopped
-    privileged: true
-    volumes:
-      - /dev/bus/usb:/dev/bus/usb
+  # adb:
+  #   image: sorccu/adb:latest
+  #   restart: unless-stopped
+  #   privileged: true
+  #   volumes:
+  #     - /dev/bus/usb:/dev/bus/usb
   rethinkdb:
     image: rethinkdb:2.3
     restart: unless-stopped
@@ -79,11 +79,11 @@ services:
   provider:
     image: openstf/stf:latest
     restart: unless-stopped
-    command: stf provider --name ${STATION_NAME} --connect-sub tcp://dev-triproxy:7250 --connect-push tcp://dev-triproxy:7270 --storage-url http://${PUBLIC_IP}/ --public-ip ${PUBLIC_IP} --heartbeat-interval 10000 --screen-ws-url-pattern "ws://${PUBLIC_IP}/d/nuc/<%= serial %>/<%= publicPort %>/" --adb-host adb --min-port 7400 --max-port 7700 --allow-remote
+    command: stf provider --name ${STATION_NAME} --connect-sub tcp://dev-triproxy:7250 --connect-push tcp://dev-triproxy:7270 --storage-url http://${PUBLIC_IP}/ --public-ip ${PUBLIC_IP} --heartbeat-interval 10000 --screen-ws-url-pattern "ws://${PUBLIC_IP}/d/nuc/<%= serial %>/<%= publicPort %>/" --adb-host host.docker.internal --min-port 7400 --max-port 7700 --allow-remote
     ports:
       - 7400-7700:7400-7700
     depends_on:
-      - adb
+      # - adb
       - dev-triproxy
       - triproxy
       - storage-temp
