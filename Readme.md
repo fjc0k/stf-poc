@@ -22,6 +22,9 @@
   # 克隆仓库
   git clone https://github.com/fjc0k/stf-poc.git
 
+  # 切换到仓库目录
+  cd stf-poc
+
   # 编排启动
   docker-compose up -d --build
   ```
@@ -32,3 +35,7 @@
 
 - 名称：`administrator`
 - 邮箱：`administrator@fakedomain.com`
+
+## 许可
+
+Jay Fong (c) MIT
